@@ -28,29 +28,61 @@
       }
     ]
   },
+  "buf": {
+    "binaries": [
+      {
+        "kind": "file",
+        "url": "https://github.com/bufbuild/buf/releases/download/v1.61.0/buf-Linux-aarch64",
+        "sha256": "37bfa47e6ede6ac1b78b3e3c93a0911b7c71d5bb9ed9c684dfc0164167619bc1",
+        "os": "linux",
+        "cpu": "arm64"
+      },
+      {
+        "kind": "file",
+        "url": "https://github.com/bufbuild/buf/releases/download/v1.61.0/buf-Linux-x86_64",
+        "sha256": "d82849eca790bacb5b8885a027f31bbfbfdf72b2d93bc82bda8cb2ca20e4faca",
+        "os": "linux",
+        "cpu": "x86_64"
+      },
+      {
+        "kind": "file",
+        "url": "https://github.com/bufbuild/buf/releases/download/v1.61.0/buf-Darwin-arm64",
+        "sha256": "b7878d0c88673e067c3a5ac60fabf133b29be71ae3a37598f2e99ee5d3c5fd22",
+        "os": "macos",
+        "cpu": "arm64"
+      },
+      {
+        "kind": "file",
+        "url": "https://github.com/bufbuild/buf/releases/download/v1.61.0/buf-Darwin-x86_64",
+        "sha256": "20323fa889d55893b67d402b714b04efe8916358ab29ccd2f70203439dc67b42",
+        "os": "macos",
+        "cpu": "x86_64"
+      }
+    ]
+  },
   "gh": {
     "binaries": [
       {
         "kind": "archive",
-        "url": "https://github.com/cli/cli/releases/download/v2.80.0/gh_2.80.0_linux_arm64.tar.gz",
-        "file": "gh_2.80.0_linux_arm64/bin/gh",
-        "sha256": "785a746a7b42baaf42f7d792c9ca1732451a28b78112a1a3b38884156cdeb8a2",
+        "url": "https://github.com/cli/cli/releases/download/v2.83.2/gh_2.83.2_linux_arm64.tar.gz",
+        "file": "gh_2.83.2_linux_arm64/bin/gh",
+        "sha256": "b1a0c0a0fcf18524e36996caddc92a062355ed014defc836203fe20fba75a38e",
         "os": "linux",
         "cpu": "arm64"
       },
       {
         "kind": "archive",
-        "url": "https://github.com/cli/cli/releases/download/v2.80.0/gh_2.80.0_linux_amd64.tar.gz",
-        "file": "gh_2.80.0_linux_amd64/bin/gh",
-        "sha256": "e0afffbf36548194aed8a1bdaf474314857a808b1b1cfa38743e2f4ed6a35b0b",
+        "url": "https://github.com/cli/cli/releases/download/v2.83.2/gh_2.83.2_linux_amd64.tar.gz",
+        "file": "gh_2.83.2_linux_amd64/bin/gh",
+        "sha256": "ca6e7641214fbd0e21429cec4b64a7ba626fd946d8f9d6d191467545b092015e",
         "os": "linux",
         "cpu": "x86_64"
       },
       {
         "kind": "archive",
-        "url": "https://github.com/cli/cli/releases/download/v2.80.0/gh_2.80.0_macOS_arm64.zip",
-        "file": "gh_2.80.0_macOS_arm64/bin/gh",
-        "sha256": "4e3567687d714272be3664244c045785573660803eabf41dff9a3a701b39f3b6",
+        "url": "https://github.com/cli/cli/releases/download/v2.83.2/gh_2.83.2_macOS_arm64.zip",
+        "file": "gh_2.83.2_macOS_arm64/bin/gh",
+        "sha256": "ba3e0396ebbc8da17256144ddda503e4e79c8b502166335569f8390d6b75fa8d",
         "os": "macos",
         "cpu": "arm64"
       }

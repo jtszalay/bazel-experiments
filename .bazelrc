@@ -9,6 +9,9 @@ import %workspace%/tools/preset.bazelrc
 # reduce clutter of repo
 common --symlink_prefix=.bazel/
 
+# allow prebuilt protoc
+common --incompatible_enable_proto_toolchain_resolution
+
 ########################
 # User preferences
 # Load any settings & overrides specific to the current user from `user.bazelrc`.

@@ -2,7 +2,7 @@
   "files.watcherExclude": {
     "**/__pycache__/**": true,
     "**/.mypy_cache/**": true,
-    "bazel-*/**": true,
+    ".bazel/**": true,
     "external/**": true
   },
   "bazel.buildifierFixOnFormat": true,

@@ -6,6 +6,9 @@ import %workspace%/tools/preset.bazelrc
 # Project-specific flags
 # This is also a place to override settings from the presets
 
+# reduce clutter of repo
+common --symlink_prefix=.bazel/
+
 ########################
 # User preferences
 # Load any settings & overrides specific to the current user from `user.bazelrc`.

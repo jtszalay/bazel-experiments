@@ -10,11 +10,16 @@ bazel_dep(name = "buildozer", version = "8.2.1")
 bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
 bazel_dep(name = "jq.bzl", version = "0.4.0")
 bazel_dep(name = "rules_coreutils", version = "1.0.1")
+bazel_dep(name = "rules_go", version = "0.59.0")
 bazel_dep(name = "rules_multitool", version = "1.11.1")
 bazel_dep(name = "tar.bzl", version = "0.7.0")
+# musl added so that we don't need a gcc or CC in path.
 bazel_dep(name = "toolchains_musl", version = "0.1.27", dev_dependency = True)
 bazel_dep(name = "yq.bzl", version = "0.3.2")
 # keep-sorted end
+
+go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.download(version = "1.25.5")
 
 multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
 multitool.hub(lockfile = "//:multitool.lock.json")

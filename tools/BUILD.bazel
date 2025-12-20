@@ -17,6 +17,7 @@ bazel_env(
     tools = {
         "buildifier": "@buildifier_prebuilt//:buildifier",
         "buildozer": BUILDOZER_LABEL,
+        "go": "@rules_go//go",
         "jq": "$(JQ_BIN)",
         "sha256sum": "@rules_coreutils//coreutils/toolchain/sha256sum:resolved",
         "tar": "$(BSDTAR_BIN)",

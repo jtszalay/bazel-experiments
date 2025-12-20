@@ -2,7 +2,7 @@
 /.jj
 
 # Bazel
-bazel-*
+.bazel/
 .bazelrc.user
 .idea/
 .ijwb/

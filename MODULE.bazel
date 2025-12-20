@@ -1,0 +1,30 @@
+module(name = "bazel_ide")
+
+# keep-sorted start
+bazel_dep(name = "bazel_env.bzl", version = "0.5.0")
+bazel_dep(name = "bazel_lib", version = "3.0.1")
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "bazelrc-preset.bzl", version = "1.8.0")
+bazel_dep(name = "buildifier_prebuilt", version = "8.2.1.1")
+bazel_dep(name = "buildozer", version = "8.2.1")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
+bazel_dep(name = "jq.bzl", version = "0.4.0")
+bazel_dep(name = "rules_coreutils", version = "1.0.1")
+bazel_dep(name = "rules_multitool", version = "1.11.1")
+bazel_dep(name = "tar.bzl", version = "0.7.0")
+bazel_dep(name = "toolchains_musl", version = "0.1.27", dev_dependency = True)
+bazel_dep(name = "yq.bzl", version = "0.3.2")
+# keep-sorted end
+
+multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
+multitool.hub(lockfile = "//:multitool.lock.json")
+use_repo(multitool, "multitool")
+
+jq_toolchains = use_extension("@jq.bzl//jq:extensions.bzl", "toolchains")
+use_repo(jq_toolchains, "jq_toolchains")
+
+yq_toolchains = use_extension("@yq.bzl//yq:extensions.bzl", "yq")
+use_repo(yq_toolchains, "yq_toolchains")
+
+tar_toolchains = use_extension("@tar.bzl//tar:extensions.bzl", "toolchains")
+use_repo(tar_toolchains, "bsd_tar_toolchains")

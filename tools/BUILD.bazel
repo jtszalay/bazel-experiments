@@ -1,0 +1,25 @@
+load("@bazel_env.bzl", "bazel_env")
+load("@bazelrc-preset.bzl", "bazelrc_preset")
+load("@buildozer//:buildozer.bzl", "BUILDOZER_LABEL")
+load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
+
+bazelrc_preset(
+    name = "preset",
+)
+
+bazel_env(
+    name = "bazel_env",
+    toolchains = {
+        "jq": "@jq_toolchains//:resolved_toolchain",
+        "tar": "@bsd_tar_toolchains//:resolved_toolchain",
+        "yq": "@yq_toolchains//:resolved_toolchain",
+    },
+    tools = {
+        "buildifier": "@buildifier_prebuilt//:buildifier",
+        "buildozer": BUILDOZER_LABEL,
+        "jq": "$(JQ_BIN)",
+        "sha256sum": "@rules_coreutils//coreutils/toolchain/sha256sum:resolved",
+        "tar": "$(BSDTAR_BIN)",
+        "yq": "$(YQ_BIN)",
+    } | MULTITOOL_TOOLS,
+)

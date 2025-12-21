@@ -27,10 +27,11 @@ multitool --lockfile multitool.lock.json update
 
 ## Examples
 
-There are language specific examples for IDE support based on existing rules and tools managed by `bazel_env.bzl`.
-
-- [C++](examples/cpp/README.md)
-- [Python](examples/py/README.md)
+- [Hello Bazel](examples/001-hello-bazel/README.md) - Minimal standalone example using Bazel and rules_go with `go_binary`, `go_library`, and `go_test` rules
+- [Hello Gazelle](examples/002-hello-gazelle/README.md) - Using Gazelle to automatically generate and update build files for Go programs with external dependencies
+- [Hello Proto](examples/003-hello-proto/README.md) - Using protobuf with `buf` to generate Go bindings for a simple gRPC echo service
+- [Proto with Gazelle](examples/004-proto-gazelle/README.md) - Using Bazel-managed protobuf with rules_go, generating `.pb.go` files at build time
+- [Proto with Write to Repo](examples/005-proto-write-to-repo/README.md) - Writing Bazel-generated protobuf code to the repository for easier IDE integration
 
 ## Resources
 
@@ -39,7 +40,5 @@ Some useful resources used for this project:
 - [Developer Tooling in Monorepos with bazel_env - feat. Fabian Meumertzheim](https://www.youtube.com/watch?v=TDyUvaXaZrc)
 - [Device management: tools on your developers PATH](https://blog.aspect.build/bazel-devenv)
 - [Bazel Env](https://github.com/buildbuddy-io/bazel_env.bzl)
-- [Dev Tools](https://github.com/luminartech/dev-tools)
-- [Rules Py](https://github.com/aspect-build/rules_py/)
 - [Bazel 102: Python](https://training.aspect.build/bazel-102)
 - [Bazel 104: C++](https://training.aspect.build/bazel-104-c)

@@ -10,7 +10,7 @@ write_go_proto_srcs(
 go_library(
     name = "echo",
     srcs = ["echo.pb.go"],
-    importpath = "github.com/jtszalay/bazel-experiments/examples/proto_write_to_repo/gen/echo/v1",  # keep
+    importpath = "github.com/jtszalay/bazel-experiments/examples/proto_write_to_repo/gen/echo/v1",
     visibility = ["//visibility:public"],
     deps = [
         "@org_golang_google_grpc//:grpc",

@@ -72,5 +72,7 @@ bazel run //go/client -- "Custom message"
 - The `go_library` targets reference local source files instead of bazel-generated outputs
 - Custom `write_go_proto_srcs` rule synchronizes generated code to source tree
 - Easier IDE integration since generated code is visible in the workspace
+- Requires gazelle configuration to resolve imports to written-to-source targets instead of `go_proto_library` targets
 
-The downside to this approach is you must manage the write to repo rules and regen the sources when they change.
+The downside to this approach is you must manage the write to repo rules and regenerate the sources when they change.
+

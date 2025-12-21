@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_library")
+load("//bazel:write_go_generated_srcs.bzl", "write_go_proto_srcs")
+
+write_go_proto_srcs(
+    name = "write_generated_protos",
+    src = "echo.pb.go",
+    go_proto_library = "//proto:echov1_go_proto",
+)
+
+go_library(
+    name = "echo",
+    srcs = ["echo.pb.go"],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/proto_write_to_repo/gen/echo/v1",  # keep
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)

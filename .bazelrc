@@ -12,6 +12,12 @@ common --symlink_prefix=.bazel/
 # allow prebuilt protoc
 common --incompatible_enable_proto_toolchain_resolution
 
+# Build OCI images for linux/amd64 (Docker default)
+build:linux --platforms=@rules_go//go/toolchain:linux_amd64
+
+# Build OCI images for linux/arm64 (Apple Silicon)
+build:linux_arm64 --platforms=@rules_go//go/toolchain:linux_arm64
+
 ########################
 # User preferences
 # Load any settings & overrides specific to the current user from `user.bazelrc`.

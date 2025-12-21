@@ -1,0 +1,12 @@
+load("@gazelle//:def.bzl", "gazelle")
+
+gazelle(name = "gazelle")
+
+# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/integration_testing
+# gazelle:build_file_name BUILD.bazel
+# gazelle:map_kind proto_library proto_library @protobuf//bazel:proto_library.bzl
+# gazelle:proto package
+# gazelle:proto_group go_package
+# gazelle:go_grpc_compilers @rules_go//proto:go_grpc
+# gazelle:proto_strip_import_prefix /proto
+# gazelle:resolve go github.com/jtszalay/bazel-experiments/examples/integration_testing/gen/echo/v1 //proto:echov1_go_proto

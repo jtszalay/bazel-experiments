@@ -1,0 +1,22 @@
+module(name = "starzelle")
+
+bazel_dep(name = "rules_go", version = "0.59.0")
+bazel_dep(name = "gazelle", version = "0.47.0")
+
+# musl added so that we don't need a gcc or CC in path.
+bazel_dep(name = "toolchains_musl", version = "0.1.27", dev_dependency = True)
+
+bazel_dep(name = "aspect_gazelle", version = "0.0.0")
+git_override(
+    module_name = "aspect_gazelle",
+    commit = "7666d013145913a34aea52db9b135ca00b0e2f6f",
+    remote = "https://github.com/aspect-build/aspect-gazelle.git",
+)
+
+bazel_dep(name = "aspect_gazelle_orion", version = "0.0.0")
+git_override(
+    module_name = "aspect_gazelle_orion",
+    commit = "7666d013145913a34aea52db9b135ca00b0e2f6f",
+    remote = "https://github.com/aspect-build/aspect-gazelle.git",
+    strip_prefix = "language/orion",
+)

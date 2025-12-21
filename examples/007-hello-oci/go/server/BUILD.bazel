@@ -1,0 +1,41 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
+load("@tar.bzl", "tar")
+
+go_library(
+    name = "server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/hello_oci/go/server",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_binary(
+    name = "server",
+    embed = [":server_lib"],
+    visibility = ["//visibility:public"],
+)
+
+tar(
+    name = "app",
+    srcs = [":server"],
+    mtree = [
+        "usr/local/bin/server uid=0 gid=0 mode=0755 type=file content=$(execpath :server)",
+    ],
+)
+
+oci_image(
+    name = "image",
+    base = "@alpine",
+    entrypoint = ["/usr/local/bin/server"],
+    tars = [":app"],
+)
+
+oci_load(
+    name = "load",
+    image = ":image",
+    repo_tags = ["hello-oci/server:latest"],
+)

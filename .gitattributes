@@ -1,0 +1,8 @@
+# Renders these files in github with the right syntax highlighting
+.bazelrc*                                                               linguist-language=Shell
+*.axl                                                                   linguist-language=Starlark
+*.bzl                                                                   linguist-language=Starlark
+BUILD                                                                   linguist-language=Starlark
+BUILD.bazel                                                             linguist-language=Starlark
+MODULE.bazel                                                            linguist-language=Starlark
+*.MODULE.bazel                                                          linguist-language=Starlark

@@ -76,3 +76,6 @@ bazel run //go/client -- "Custom message"
 
 The downside to this approach is you must manage the write to repo rules and regenerate the sources when they change.
 
+## Next
+
+Now, move to the next [example](../006-integration-testing/README.md).

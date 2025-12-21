@@ -1,4 +1,8 @@
 {
+  "go.toolsEnvVars": {
+    "GOPACKAGESDRIVER": "${workspaceFolder}/tools/gopackagesdriver.sh",
+    "GOPRIVATE": "github.com/jtszalay/*"
+  },
   "files.watcherExclude": {
     "**/__pycache__/**": true,
     "**/.mypy_cache/**": true,
@@ -7,7 +11,7 @@
   },
   "bazel.buildifierFixOnFormat": true,
   "bazel.enableCodeLens": true,
-  "bazel.lsp.command": "./bazel-out/bazel_env-opt/bin/tools/bazel_env/bin/starpls",
+  "bazel.lsp.command": "./.bazel/out/bazel_env-opt/bin/tools/bazel_env/bin/starpls",
   "bazel.queriesShareServer": false,
   "bazel.lsp.args": [
     "server",

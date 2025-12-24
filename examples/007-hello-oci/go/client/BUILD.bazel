@@ -1,4 +1,4 @@
-load("@rules_go//go:def.bzl", "go_binary", "go_library")
+load("@rules_go//go:def.bzl", "go_binary", "go_cross_binary", "go_library", "go_test")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 load("@tar.bzl", "tar")
 
@@ -20,11 +20,17 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
+go_cross_binary(
+    name = "linux_go_cross",
+    platform = "@rules_go//go/toolchain:linux_amd64",
+    target = ":client",
+)
+
 tar(
     name = "app",
-    srcs = [":client"],
+    srcs = [":linux_go_cross"],
     mtree = [
-        "usr/local/bin/client uid=0 gid=0 mode=0755 type=file content=$(execpath :client)",
+        "usr/local/bin/client uid=0 gid=0 mode=0755 type=file content=$(execpath :linux_go_cross)",
     ],
 )
 
@@ -38,5 +44,17 @@ oci_image(
 oci_load(
     name = "load",
     image = ":image",
-    repo_tags = ["hello-oci/client:latest"],
+    repo_tags = ["bazel-experiments/client:latest"],
+)
+
+go_test(
+    name = "client_test",
+    srcs = ["client_test.go"],
+    embed = [":client_lib"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_google_grpc//test/bufconn",
+    ],
 )

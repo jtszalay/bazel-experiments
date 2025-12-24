@@ -17,18 +17,12 @@ bazel run //go/server:load
 bazel run //go/client:load
 ```
 
-If on a mac use the following:
 ```bash
-bazel run --config=linux_arm64 //go/server:load
-bazel run --config=linux_arm64 //go/client:load
+docker run -it --rm -p 50051:50051 bazel-experiments/server:latest
 ```
 
 ```bash
-docker run -it --rm -p 50051:50051 hello-oci/server:latest
-```
-
-```bash
-docker run -it --rm --add-host=host.docker.internal:host-gateway hello-oci/client:latest --addr host.docker.internal:50051 "hello"
+docker run -it --rm --add-host=host.docker.internal:host-gateway bazel-experiments/client:latest --addr host.docker.internal:50051 "hello"
 ```
 
 # Next

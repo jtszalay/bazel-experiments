@@ -1,0 +1,32 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("//tools/macros/oci:defs.bzl", "oci")
+
+go_library(
+    name = "server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/starzelle_oci/go/server",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+    ],
+)
+
+go_binary(
+    name = "server",
+    embed = [":server_lib"],
+    visibility = ["//visibility:public"],
+)
+
+oci(
+    name = "server_oci",
+    target = ":server",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "server_test",
+    srcs = ["server_test.go"],
+    embed = [":server_lib"],
+    deps = ["//proto:echov1_go_proto"],
+)

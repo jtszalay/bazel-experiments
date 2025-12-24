@@ -2,6 +2,9 @@
 
 # The following logic is done because we have multiple Bazel workspaces in the same root directory. We need to scope the bazel run below to match the workspace we're in.
 
+# put bazel on the PATH
+export PATH=$(git rev-parse --show-toplevel)/bin:$PATH
+
 # Extract file path from arguments
 file_path=""
 for arg in "$@"; do

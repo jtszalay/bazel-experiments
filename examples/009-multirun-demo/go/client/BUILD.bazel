@@ -1,0 +1,44 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_cross_binary", "go_library", "go_test")
+load("//tools/macros/oci:defs.bzl", "oci")
+
+go_library(
+    name = "client_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/multirun_demo/go/client",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_binary(
+    name = "client",
+    embed = [":client_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_cross_binary(
+    name = "linux_go_cross",
+    platform = "@rules_go//go/toolchain:linux_amd64",
+    target = ":client",
+)
+
+oci(
+    name = "client_oci",
+    target = ":linux_go_cross",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "client_test",
+    srcs = ["client_test.go"],
+    embed = [":client_lib"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_google_grpc//test/bufconn",
+    ],
+)

@@ -16,4 +16,4 @@ bazel_dep(name = "toolchains_musl", version = "0.1.27", dev_dependency = True)
 # Bazel typically uses the Go toolchain downloaded here instead of
 # one installed on the host machine.
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.25.5")
+go_sdk.download(version = "1.23.4")

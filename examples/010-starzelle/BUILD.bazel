@@ -1,0 +1,20 @@
+load("@gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
+
+# gazelle:print_paths enabled
+
+gazelle_binary(
+    name = "gazelle_binary",
+    languages = DEFAULT_LANGUAGES + [
+        "@aspect_gazelle_orion//:orion",
+        # Any languages that depend on Gazelle's proto plugin must come after it.
+    ],
+    visibility = ["//visibility:public"],
+)
+
+gazelle(
+    name = "gazelle",
+    env = {
+        "ORION_EXTENSIONS_DIR": "tools/starzelle",
+    },
+    gazelle = ":gazelle_binary",
+)

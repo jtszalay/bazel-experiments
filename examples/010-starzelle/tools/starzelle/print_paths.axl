@@ -1,0 +1,14 @@
+def declare(ctx):
+    print(ctx.rel)
+
+def prepare(ctx):
+    return aspect.PrepareResult(
+        sources = [],
+        queries = {},
+    )
+
+aspect.orion_extension(
+    id = "print_paths",
+    prepare = prepare,
+    declare = declare,
+)

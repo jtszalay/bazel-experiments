@@ -1,0 +1,40 @@
+load("@rules_go//go:def.bzl", "go_test")
+load("@rules_itest//:itest.bzl", "itest_service", "service_test")
+
+# Echo server service - starts the gRPC server on a random port
+itest_service(
+    name = "echo_server",
+    args = [
+        "-port",
+        "$${PORT}",
+    ],
+    autoassign_port = True,
+    exe = "//go/server",
+    health_check_timeout = "5s",
+    shutdown_signal = "SIGTERM",
+    shutdown_timeout = "5s",
+)
+
+# Wraps the test with the service
+service_test(
+    name = "echo_integration",
+    env = {
+        "ECHO_SERVER_PORT": "$${@@//go/integration:echo_server}",
+    },
+    services = [":echo_server"],
+    test = ":integration_test",
+)
+
+go_test(
+    name = "integration_test",
+    srcs = [
+        "integration_test.go",
+        "messages_test.go",
+    ],
+    tags = ["manual"],  # keep, wrapped by service_test above
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)

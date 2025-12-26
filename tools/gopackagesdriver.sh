@@ -26,4 +26,4 @@ if [ -n "$file_path" ]; then
   done
 fi
 
-exec bazel run -- @rules_go//go/tools/gopackagesdriver "${@}"
+exec bazel run --norun_validations -- @rules_go//go/tools/gopackagesdriver "${@}"

@@ -31,5 +31,6 @@ jobs:
         with:
           push: never
           runCmd: |
+            eval "$(direnv export bash)"
             bazel test --config=ci //...
             bazel run --config=ci //tools:bazel_env print-path

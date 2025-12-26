@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	client "github.com/jtszalay/bazel-experiments/examples/integration_testing/client"
 	echov1 "github.com/jtszalay/bazel-experiments/examples/integration_testing/gen/echo/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -26,12 +27,12 @@ func TestDefaultMessage(t *testing.T) {
 	}
 	defer conn.Close()
 
-	client := echov1.NewEchoServiceClient(conn)
+	echoClient := echov1.NewEchoServiceClient(conn)
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	// Test with default empty message
-	resp, err := client.Echo(ctx, &echov1.EchoRequest{Message: ""})
+	resp, err := client.SendEchoRequest(ctx, echoClient, "")
 	if err != nil {
 		t.Fatalf("Echo with default message failed: %v", err)
 	}
@@ -54,7 +55,7 @@ func TestVariousMessages(t *testing.T) {
 	}
 	defer conn.Close()
 
-	client := echov1.NewEchoServiceClient(conn)
+	echoClient := echov1.NewEchoServiceClient(conn)
 
 	testCases := []struct {
 		name     string
@@ -113,7 +114,7 @@ func TestVariousMessages(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
 
-			resp, err := client.Echo(ctx, &echov1.EchoRequest{Message: tc.message})
+			resp, err := client.SendEchoRequest(ctx, echoClient, tc.message)
 			if err != nil {
 				t.Fatalf("Echo failed for %q: %v", tc.name, err)
 			}
@@ -136,7 +137,7 @@ func TestConcurrentRequests(t *testing.T) {
 	}
 	defer conn.Close()
 
-	client := echov1.NewEchoServiceClient(conn)
+	echoClient := echov1.NewEchoServiceClient(conn)
 
 	// Send multiple concurrent requests
 	const numRequests = 10
@@ -148,7 +149,7 @@ func TestConcurrentRequests(t *testing.T) {
 			defer cancel()
 
 			message := fmt.Sprintf("Concurrent message %d", id)
-			resp, err := client.Echo(ctx, &echov1.EchoRequest{Message: message})
+			resp, err := client.SendEchoRequest(ctx, echoClient, message)
 			if err != nil {
 				results <- fmt.Errorf("request %d failed: %w", id, err)
 				return

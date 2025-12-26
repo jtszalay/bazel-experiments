@@ -2,9 +2,12 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 
 go_library(
     name = "client_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/jtszalay/bazel-experiments/examples/integration_testing/go/client",
-    visibility = ["//visibility:private"],
+    srcs = [
+        "helpers.go",
+        "main.go",
+    ],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/integration_testing/client",
+    visibility = [":__subpackages__"],
     deps = [
         "//proto:echov1_go_proto",
         "@org_golang_google_grpc//:grpc",

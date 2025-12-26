@@ -4,8 +4,11 @@ load("@tar.bzl", "tar")
 
 go_library(
     name = "client_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/jtszalay/bazel-experiments/examples/hello_oci/go/client",
+    srcs = [
+        "helpers.go",
+        "main.go",
+    ],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/hello_oci/client",
     visibility = ["//visibility:private"],
     deps = [
         "//proto:echov1_go_proto",

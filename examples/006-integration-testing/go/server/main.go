@@ -16,10 +16,7 @@ type echoServer struct {
 }
 
 func (s *echoServer) Echo(ctx context.Context, req *echov1.EchoRequest) (*echov1.EchoResponse, error) {
-	log.Printf("Received: %s", req.GetMessage())
-	return &echov1.EchoResponse{
-		Message: req.GetMessage(),
-	}, nil
+	return handleEchoRequest(ctx, req)
 }
 
 func main() {

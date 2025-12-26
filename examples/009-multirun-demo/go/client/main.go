@@ -32,7 +32,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	resp, err := client.Echo(ctx, &echov1.EchoRequest{Message: message})
+	resp, err := SendEchoRequest(ctx, client, message)
 	if err != nil {
 		log.Fatalf("failed to echo: %v", err)
 	}

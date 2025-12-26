@@ -84,7 +84,7 @@ func TestEchoClient(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
 
-			resp, err := client.Echo(ctx, &echov1.EchoRequest{Message: tt.message})
+			resp, err := SendEchoRequest(ctx, client, tt.message)
 			if err != nil {
 				t.Fatalf("Echo() error = %v", err)
 			}

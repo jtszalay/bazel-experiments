@@ -1,1 +1,3 @@
+# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/starzelle_oci
+
 exports_files(["go.mod"])

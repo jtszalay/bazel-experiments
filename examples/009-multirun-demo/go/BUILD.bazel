@@ -1,1 +1,3 @@
+# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/multirun_demo
+
 exports_files(["go.mod"])

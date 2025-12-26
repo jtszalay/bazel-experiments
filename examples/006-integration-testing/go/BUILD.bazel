@@ -1,1 +1,3 @@
+# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/integration_testing
+
 exports_files(["go.mod"])

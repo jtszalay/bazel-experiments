@@ -3,8 +3,11 @@ load("//tools/macros/oci:defs.bzl", "oci")
 
 go_library(
     name = "server_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/jtszalay/bazel-experiments/examples/hello_macros/go/server",
+    srcs = [
+        "helpers.go",
+        "main.go",
+    ],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/hello_macros/server",
     visibility = ["//visibility:private"],
     deps = [
         "//proto:echov1_go_proto",

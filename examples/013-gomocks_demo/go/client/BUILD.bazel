@@ -4,8 +4,11 @@ load("//tools/macros/oci:defs.bzl", "oci")
 
 go_library(
     name = "client_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/jtszalay/bazel-experiments/examples/gomocks_demo/go/client",
+    srcs = [
+        "helpers.go",
+        "main.go",
+    ],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/gomocks_demo/client",
     visibility = ["//visibility:private"],
     deps = [
         "//proto:echov1_go_proto",

@@ -1,1 +1,3 @@
+# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/bazel_query
+
 exports_files(["go.mod"])

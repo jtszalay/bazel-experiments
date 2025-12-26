@@ -19,7 +19,7 @@ itest_service(
 service_test(
     name = "echo_integration",
     env = {
-        "ECHO_SERVER_PORT": "$${@@//go/integration:echo_server}",
+        "ECHO_SERVER_PORT": "$${@@//go/client/integration:echo_server}",
     },
     services = [":echo_server"],
     test = ":integration_test",
@@ -33,6 +33,7 @@ go_test(
     ],
     tags = ["manual"],  # keep, wrapped by service_test above
     deps = [
+        "//go/client:client_lib",
         "//proto:echov1_go_proto",
         "@org_golang_google_grpc//:grpc",
         "@org_golang_google_grpc//credentials/insecure",

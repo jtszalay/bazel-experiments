@@ -5,7 +5,6 @@ load("//:images.bzl", "image_targets")
 
 gazelle(name = "gazelle")
 
-# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/bazel_query
 # gazelle:build_file_name BUILD.bazel
 # gazelle:map_kind proto_library proto_library @protobuf//bazel:proto_library.bzl
 # gazelle:proto package

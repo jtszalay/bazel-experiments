@@ -2,7 +2,6 @@ load("@gazelle//:def.bzl", "gazelle")
 
 gazelle(name = "gazelle")
 
-# gazelle:prefix github.com/jtszalay/bazel-experiments/examples/hello_macros
 # gazelle:build_file_name BUILD.bazel
 # gazelle:map_kind proto_library proto_library @protobuf//bazel:proto_library.bzl
 # gazelle:proto package

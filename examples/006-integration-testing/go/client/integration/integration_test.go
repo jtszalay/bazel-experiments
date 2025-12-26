@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	client "github.com/jtszalay/bazel-experiments/examples/integration_testing/client"
 	echov1 "github.com/jtszalay/bazel-experiments/examples/integration_testing/gen/echo/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -30,7 +31,7 @@ func TestEchoServerIntegration(t *testing.T) {
 	}
 	defer conn.Close()
 
-	client := echov1.NewEchoServiceClient(conn)
+	echoClient := echov1.NewEchoServiceClient(conn)
 
 	tests := []struct {
 		name    string
@@ -46,7 +47,7 @@ func TestEchoServerIntegration(t *testing.T) {
 			reqCtx, reqCancel := context.WithTimeout(ctx, 5*time.Second)
 			defer reqCancel()
 
-			resp, err := client.Echo(reqCtx, &echov1.EchoRequest{Message: tt.message})
+			resp, err := client.SendEchoRequest(reqCtx, echoClient, tt.message)
 			if err != nil {
 				t.Fatalf("Echo failed: %v", err)
 			}

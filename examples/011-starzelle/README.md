@@ -1,15 +1,62 @@
-# Starzelle
+# Starzelle Example
 
-This example documents the basic setup of using the aspect-gazelle orion extension with with main bazel-gazelle project. Referred to here as "starzelle" because the extension uses starlark.
+This example demonstrates how to extend Gazelle with custom Starlark-based extensions using Aspect's Orion.
+It continues from the [bazel-query](../010-bazel-query/README.md) example.
 
-The orion extension allows you to [extend gazelle](https://github.com/bazel-contrib/bazel-gazelle/blob/master/extend.md) without needing to write your extension in go. This is useful because you can update the logic without needing to rebuild the extension.
+"Starzelle" refers to Gazelle extensions written in Starlark (rather than Go). The Aspect Orion extension allows you to [extend Gazelle](https://github.com/bazel-contrib/bazel-gazelle/blob/master/extend.md) without needing to write Go code. This is useful because you can update extension logic without rebuilding Gazelle itself.
 
-The readme for aspect.build's orion extension for gazelle can be found [here](https://github.com/aspect-build/aspect-gazelle/tree/main/language/orion). Their linked public docs require a login but the old docs for the extension can be found in their archived project [here](https://github.com/aspect-build/aspect-cli-legacy/blob/main/docs/starlark.md).
+## Prerequisites
 
-For the purpose of showing how the extension is setup this one simply prints the paths that are visited when you run
+- Bazel (for building)
+- Understanding of Gazelle basics
+- Familiarity with Starlark syntax
+
+## What This Example Demonstrates
+
+- Setting up Aspect Orion extension for Gazelle
+- Creating custom Gazelle extensions in Starlark
+- Configuring `gazelle_binary` with custom languages
+- Using environment variables to configure extensions
+- Basic Gazelle extension lifecycle (Configure, GenerateRules, etc.)
+
+## Structure
+
+```
+011-starzelle/
+├── BUILD.bazel              # Custom gazelle_binary with Orion
+├── tools/
+│   └── starzelle/           # Starlark extension directory
+└── proto/
+```
+
+## How It Works
+
+The extension is configured in [BUILD.bazel](file:///Users/james/bazel-experiments/examples/011-starzelle/BUILD.bazel):
+
+```starlark
+gazelle_binary(
+    name = "gazelle_binary",
+    languages = DEFAULT_LANGUAGES + [
+        "@aspect_gazelle_orion//:orion",
+    ],
+)
+
+gazelle(
+    name = "gazelle",
+    env = {
+        "ORION_EXTENSIONS_DIR": "tools/starzelle",
+    },
+    gazelle = ":gazelle_binary",
+)
+```
+
+## Run Gazelle with Extension
+
 ```bash
 bazel run //:gazelle
 ```
+
+This example's extension prints the paths visited during Gazelle execution:
 
 ```
 AspectConfigure-print_paths: .bazel
@@ -17,3 +64,26 @@ AspectConfigure-print_paths: tools/starzelle
 AspectConfigure-print_paths: tools
 AspectConfigure-print_paths:
 ```
+
+## Resources
+
+- [Aspect Gazelle Orion Extension](https://github.com/aspect-build/aspect-gazelle/tree/main/language/orion)
+- [Archived Starlark Extension Docs](https://github.com/aspect-build/aspect-cli-legacy/blob/main/docs/starlark.md)
+- [Extending Gazelle Guide](https://github.com/bazel-contrib/bazel-gazelle/blob/master/extend.md)
+
+## Benefits of Starlark Extensions
+
+- **No compilation needed**: Changes take effect immediately
+- **Easier to write**: Starlark is simpler than Go for many users
+- **Faster iteration**: No need to rebuild Gazelle binary for changes
+- **Good for prototyping**: Test extension ideas quickly
+
+## Limitations
+
+- Less powerful than Go-based extensions
+- May have performance overhead for complex operations
+- Access to fewer Gazelle internals
+
+## Next
+
+Now, move to the [starzelle OCI](../012-starzelle-oci/README.md) example.

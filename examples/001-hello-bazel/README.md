@@ -48,4 +48,7 @@ If we update the `go_library` rule to include our new file, Bazel will be able t
 Updating build files can be tedious, but it is a necessary step to ensure that Bazel knows about all the files in your project.
 
 We can use another tool to help us with this. [gazelle](https://github.com/bazelbuild/bazel-gazelle) is a tool that can automatically generate and update build files based on the source code in your project.
-Now, move to the [gazelle example](../002-hello-gazelle/README.md).
+
+# Next
+
+Now, move to the [gazelle](../002-hello-gazelle/README.md) example.

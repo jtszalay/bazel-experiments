@@ -1,7 +1,7 @@
 # Proto with gazelle Example
 
 This example demonstrates how to use bazel managed protobuf with rules_go.
-It continues from the hello-proto [example](../003-hello-proto/README.md).
+It continues from the [hello-proto](../003-hello-proto/README.md) example.
 
 For this example we have a similar structure to the previous example except rather than
 generating `.pb.go` files with buf to a package in the `go` tree we use bazel to provide those at build time.
@@ -9,7 +9,7 @@ generating `.pb.go` files with buf to a package in the `go` tree we use bazel to
 ## Structure
 
 ```
-004-hello-proto/
+004-proto-gazelle/
 ├── proto/              # Protocol buffer definitions
 │   ├── echo.proto      # Echo service definition
 └── go/                 # Go code

@@ -65,4 +65,4 @@ bazel run //go/client -- "Custom message"
 
 # Next
 
-Now, move to the next [example](../004-proto-gazelle/README.md).
+Now, move to the [protobuf with gazelle](../004-proto-gazelle/README.md) example.

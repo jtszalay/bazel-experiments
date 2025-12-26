@@ -5,6 +5,18 @@ It continues from the proto-gazelle [example](../004-proto-gazelle/README.md).
 
 Unlike the previous example where `.pb.go` files are generated at build time in bazel's cache, this example writes them to the source tree under `go/gen/`. This provides out of the box IDE support since tools can see the generated code directly.
 
+## Prerequisites
+
+- Bazel (for building and running)
+
+## What This Example Demonstrates
+
+- Writing Bazel-generated protobuf code to the source tree
+- Creating custom `write_go_proto_srcs` rules
+- Configuring Gazelle to resolve imports to written-to-source targets
+- Improving IDE integration by making generated code visible
+- Trade-offs between build-time generation vs checked-in generated code
+
 ## Structure
 
 ```
@@ -19,10 +31,6 @@ Unlike the previous example where `.pb.go` files are generated at build time in 
 └── bazel/              # Custom Bazel rules
     └── write_go_generated_srcs.bzl  # Rule for writing generated code
 ```
-
-## Prerequisites
-
-- Bazel (for building and running)
 
 ## Generate Protocol Buffer Code
 

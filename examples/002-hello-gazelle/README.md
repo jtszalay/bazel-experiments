@@ -37,4 +37,4 @@ You'll need to install the musl libc package on your system.
 
 # Next
 
-Now, move to the next [example](../003-hello-proto/README.md).
+Now, move to the [protobuf](../003-hello-proto/README.md) example.

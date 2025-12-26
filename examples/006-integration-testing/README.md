@@ -42,7 +42,7 @@ bazel run //:gazelle
 To run the integration tests:
 
 ```bash
-bazel test //go/integration:integration_test
+bazel test //go/client/integration:echo_integration
 ```
 
 The `rules_itest` framework will:

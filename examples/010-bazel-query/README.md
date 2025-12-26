@@ -35,9 +35,9 @@ Instead of manually maintaining lists of targets (like OCI load targets), you ca
 
 ## How It Works
 
-The [generate_load_images.sh](file:///Users/james/bazel-experiments/examples/010-bazel-query/scripts/generate_load_images.sh) script:
+The [generate_load_images.sh](./scripts/generate_load_images.sh) script:
 1. Uses `bazel query` to find all targets ending in `_oci_load`
-2. Generates [images.bzl](file:///Users/james/bazel-experiments/examples/010-bazel-query/images.bzl) with the list of targets
+2. Generates [images.bzl](./images.bzl) with the list of targets
 3. The multirun target loads this list and runs all image loads
 
 ## Update Bazel Targets
@@ -48,7 +48,7 @@ bazel run //:gazelle
 
 ## Generate the Image Targets List
 
-Run the query script to regenerate [images.bzl](file:///Users/james/bazel-experiments/examples/010-bazel-query/images.bzl):
+Run the query script to regenerate [images.bzl](./images.bzl):
 
 ```bash
 bazel run //:generate_load_images

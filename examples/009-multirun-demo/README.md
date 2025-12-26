@@ -30,7 +30,7 @@ When working with multiple related services or images, you often need to run sev
 
 ## The Multirun Target
 
-In the root [BUILD.bazel](file:///Users/james/bazel-experiments/examples/009-multirun-demo/BUILD.bazel):
+In the root [BUILD.bazel](./BUILD.bazel):
 
 ```starlark
 multirun(

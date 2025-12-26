@@ -28,7 +28,7 @@ In the previous example, building OCI images required repeating several rules fo
 │       └── oci/
 │           ├── BUILD.bazel
 │           └── defs.bzl          # Custom OCI macro definition
-├── proto/                        # Protocol buffer definitions
+├── proto/                        # Protobuf definitions
 └── go/
     ├── client/                   # Uses the OCI macro
     └── server/                   # Uses the OCI macro

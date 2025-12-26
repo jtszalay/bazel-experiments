@@ -21,7 +21,7 @@ Unlike the previous example where `.pb.go` files are generated at build time in 
 
 ```
 005-proto-write-to-repo/
-├── proto/              # Protocol buffer definitions
+├── proto/              # Protobuf definitions
 │   ├── echo.proto      # Echo service definition
 ├── go/                 # Go code
 │   ├── gen/            # Generated protobuf code (written to source)
@@ -86,4 +86,4 @@ The downside to this approach is you must manage the write to repo rules and reg
 
 ## Next
 
-Now, move to the next [example](../006-integration-testing/README.md).
+Now, move to the [integration testing](../006-integration-testing/README.md) example.

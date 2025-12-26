@@ -38,7 +38,7 @@ Building on the Starzelle concept, this example shows a practical use case: auto
 
 ## How the Extension Works
 
-The [oci.axl](file:///Users/james/bazel-experiments/examples/012-starzelle-oci/tools/starzelle/oci.axl) extension:
+The [oci.axl](./tools/starzelle/oci.axl) extension:
 
 1. **Searches for `main.go` files** using `aspect.SourceGlobs("**/main.go")`
 2. **Generates `oci()` targets** automatically for each directory containing `main.go`

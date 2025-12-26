@@ -69,7 +69,7 @@ bazel test //go/server:server_test
 
 ## Understanding the Mock Test
 
-The [client_mock_test.go](file:///Users/james/bazel-experiments/examples/013-gomocks_demo/go/client/client_mock_test.go) shows how to use mocks:
+The [client_mock_test.go](./go/client/client_mock_test.go) shows how to use mocks:
 
 ```go
 // Create a mock controller

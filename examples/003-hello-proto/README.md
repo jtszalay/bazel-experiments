@@ -6,7 +6,7 @@ This example demonstrates how to use protobuf with `buf` to generate Go bindings
 
 ```
 003-hello-proto/
-├── proto/              # Protocol buffer definitions
+├── proto/              # Protobuf definitions
 │   ├── echo.proto      # Echo service definition
 │   ├── buf.yaml        # Buf configuration
 │   └── buf.gen.yaml    # Buf code generation config

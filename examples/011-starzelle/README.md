@@ -31,7 +31,7 @@ It continues from the [bazel-query](../010-bazel-query/README.md) example.
 
 ## How It Works
 
-The extension is configured in [BUILD.bazel](file:///Users/james/bazel-experiments/examples/011-starzelle/BUILD.bazel):
+The extension is configured in [BUILD.bazel](./BUILD.bazel):
 
 ```starlark
 gazelle_binary(

@@ -10,7 +10,7 @@ generating `.pb.go` files with buf to a package in the `go` tree we use bazel to
 
 ```
 004-proto-gazelle/
-├── proto/              # Protocol buffer definitions
+├── proto/              # Protobuf definitions
 │   ├── echo.proto      # Echo service definition
 └── go/                 # Go code
     ├── client/         # Echo client
@@ -56,4 +56,5 @@ bazel run //go/client -- "Custom message"
 
 # Next
 
-Now, move to the next [example](../005-proto-write-to-repo/README.md).
+Now, either move to the [integration testing](../006-integration-testing/README.md) example.
+Or, take a detour to the [write to repo](../005-proto-write-to-repo/README.md) example to learn how we could write the bazel generated proto files to the repo.

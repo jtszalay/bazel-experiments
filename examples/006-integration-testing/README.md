@@ -1,7 +1,7 @@
 # Integration Testing Example
 
 This example demonstrates how to write integration tests for your Bazel project using `rules_itest`.
-It continues from the [proto-write-to-repo](../005-proto-write-to-repo/README.md) example.
+It continues from the [proto-gazelle](../004-proto-gazelle/README.md) example.
 
 Unlike unit tests that test individual components in isolation, integration tests verify that multiple components work together correctly. In this example, we write integration tests for the echo gRPC service, starting the server as a long-running process and testing it with a real client.
 
@@ -21,7 +21,7 @@ Unlike unit tests that test individual components in isolation, integration test
 
 ```
 006-integration-testing/
-├── proto/              # Protocol buffer definitions
+├── proto/              # Protobuf definitions
 ├── go/
 │   ├── client/         # Echo client
 │   ├── server/         # Echo server

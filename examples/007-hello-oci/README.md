@@ -22,7 +22,7 @@ OCI images (commonly known as Docker images) allow you to package your applicati
 
 ```
 007-hello-oci/
-├── proto/              # Protocol buffer definitions
+├── proto/              # Protobuf definitions
 └── go/
     ├── client/         # Echo client with OCI image target
     └── server/         # Echo server with OCI image target

@@ -6,6 +6,9 @@ import %workspace%/tools/preset.bazelrc
 # Project-specific flags
 # This is also a place to override settings from the presets
 
+# Use GitHub mirror for BCR to work around bcr.bazel.build outages
+common --registry=https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/main/
+
 # reduce clutter of repo
 common --symlink_prefix=.bazel/
 

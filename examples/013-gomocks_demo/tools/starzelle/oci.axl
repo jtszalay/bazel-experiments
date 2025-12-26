@@ -1,0 +1,35 @@
+aspect.gazelle_rule_kind("oci", {
+    "From": "//tools/macros/oci:defs.bzl",
+})
+
+def declare(ctx):
+    if len(ctx.sources) == 0:
+        return
+
+    target = ctx.rel.split("/")[-1]
+
+    ctx.targets.add(
+        name = target + "_oci",
+        kind = "oci",
+        attrs = {
+            "target": aspect.Label(
+                    pkg = ctx.rel,
+                    name = target,
+                ),
+            "visibility": ["//visibility:public"],
+        },
+    )
+
+def prepare(ctx):
+    return aspect.PrepareResult(
+        sources = [
+            aspect.SourceGlobs("**/main.go"),
+        ],
+        queries = {},
+    )
+
+aspect.orion_extension(
+    id = "oci",
+    prepare = prepare,
+    declare = declare,
+)

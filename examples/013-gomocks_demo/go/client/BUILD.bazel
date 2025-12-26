@@ -1,0 +1,52 @@
+load("@bazel_gomock//rules:gomock.bzl", "gomock")
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("//tools/macros/oci:defs.bzl", "oci")
+
+go_library(
+    name = "client_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/jtszalay/bazel-experiments/examples/gomocks_demo/go/client",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_binary(
+    name = "client",
+    embed = [":client_lib"],
+    visibility = ["//visibility:public"],
+)
+
+oci(
+    name = "client_oci",
+    target = ":client",
+    visibility = ["//visibility:public"],
+)
+
+gomock(
+    name = "mock_echo_service",
+    out = "mock_echo_service.go",
+    interfaces = ["EchoServiceClient"],
+    library = "//proto:echov1_go_proto",
+    package = "main",
+)
+
+go_test(
+    name = "client_test",
+    srcs = [
+        "client_mock_test.go",
+        "client_test.go",
+        ":mock_echo_service",
+    ],
+    embed = [":client_lib"],
+    deps = [
+        "//proto:echov1_go_proto",
+        "@org_uber_go_mock//gomock",
+        "@org_golang_google_grpc//:grpc",
+        "@org_golang_google_grpc//credentials/insecure",
+        "@org_golang_google_grpc//test/bufconn",
+    ],
+)

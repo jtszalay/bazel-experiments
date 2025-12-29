@@ -22,7 +22,7 @@ Mock objects allow you to test code in isolation by replacing external dependenc
 ## Structure
 
 ```
-013-gomocks_demo/
+013-gomocks-demo/
 ├── BUILD.bazel              # Includes bazel_gomock dependency
 ├── proto/                   # Echo service definition
 └── go/

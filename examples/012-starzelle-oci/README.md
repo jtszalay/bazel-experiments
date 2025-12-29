@@ -107,4 +107,4 @@ docker run -it --rm --add-host=host.docker.internal:host-gateway bazel-experimen
 
 ## Next
 
-Now, move to the [GoMock](../013-gomocks_demo/README.md) example.
+Now, move to the [GoMock](../013-gomocks-demo/README.md) example.

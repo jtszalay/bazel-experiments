@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# NOTE: This script relies on bazel's feature where //tools/bazel
+# script can be used to hijack "bazel" invocations in given workspace.
+# Yes, it has to be located here. https://github.com/bazelbuild/bazel/issues/5788
+# No, it is not customizable.
+# You can see this if you peek inside of $ cat `which bazel`
+
+# We can also use this as a way to inject various behaviors into bazel invocations.
+
+echo -e -n "\x1b[92;1mINFO: \x1b[0mRunning bazel wrapper (see //tools/bazel for details).\x1b[0m\n" >&2
+
+extra_bazel_args=()
+
+# Test if https://bcr.bazel.build can be reached.
+# If not we'll use the fallback registry.
+status_code=$(curl -s -o /dev/null -w "%{http_code}" https://bcr.bazel.build)
+if [ $status_code -ne 200 ]; then
+	echo -e -n "\x1b[92;1mINFO: \x1b[0mBazel Central Registry is not reachable. Falling back to using github.\x1b[0m\n" >&2
+	extra_bazel_args+=("--config=fallback")
+else
+	echo -e -n "\x1b[92;1mINFO: \x1b[0mUsing default registry.\x1b[0m\n" >&2
+fi
+
+# split incoming args on --
+# then put extra_bazel_args before the -- if it exists
+# then append the rest of the args
+args=("$@")
+for ((i = 0; i < ${#args[@]}; i++)); do
+	if [[ "${args[i]}" == -- ]]; then
+		args=("${args[@]:0:i}" "${extra_bazel_args[@]}" "${args[@]:i}")
+		break
+	fi
+done
+# if no -- is found, put extra_bazel_args at the end of the args
+# If the loop completes without breaking, i equals the array length, so we append the extra args.
+((i == ${#args[@]})) && args+=("${extra_bazel_args[@]}")
+
+exec -a "$0" "${BAZEL_REAL}" "${args[@]}"

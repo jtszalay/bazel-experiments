@@ -1,0 +1,103 @@
+load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
+load("@container_structure_test//:defs.bzl", "container_structure_test")
+load("@rules_distroless//distroless:defs.bzl", "cacerts", "group", "passwd")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
+
+COMPATIBLE_WITH = [
+    "@platforms//os:linux",
+    "@platforms//cpu:x86_64",
+]
+
+passwd(
+    name = "base_passwd",
+    entries = [
+        {
+            "uid": 0,
+            "gid": 0,
+            "home": "/root",
+            "shell": "/bin/bash",
+            "username": "root",
+        },
+        {
+            "uid": 100,
+            "gid": 65534,
+            "home": "/home/_apt",
+            "shell": "/usr/sbin/nologin",
+            "username": "_apt",
+        },
+    ],
+)
+
+group(
+    name = "base_group",
+    entries = [
+        {
+            "name": "root",
+            "gid": 0,
+        },
+        {
+            "name": "_apt",
+            "gid": 65534,
+        },
+    ],
+)
+
+cacerts(
+    name = "base_cacerts",
+    package = "@base-deps//ca-certificates:data",
+    target_compatible_with = COMPATIBLE_WITH,
+)
+
+
+oci_image(
+    name = "image",
+    architecture = "amd64",
+    env = {
+        # Required to use the SSL certs from `cacerts()`
+        "SSL_CERT_FILE": "/etc/ssl/certs/ca-certificates.crt",
+    },
+    os = "linux",
+    target_compatible_with = COMPATIBLE_WITH,
+    tars = [
+        "@base-deps//:flat",
+        ":base_passwd",
+        ":base_group",
+        ":base_cacerts",
+    ],
+)
+
+platform(
+    name = "linux_amd64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+platform_transition_filegroup(
+    name = "image_platform",
+    srcs = ["image"],
+    target_platform = ":linux_amd64",
+    visibility = ["//visibility:public"],
+)
+
+oci_load(
+    name = "tarball",
+    image = "image_platform",
+    repo_tags = [
+        "jtszalay/distroless-demo:latest",
+    ],
+    tags = [
+        "no-cache",
+    ],
+    # NOTE: this is needed because, otherwise, bazel test //... fails, even
+    # when container_structure_test already has target_compatible_with.
+    target_compatible_with = COMPATIBLE_WITH,
+)
+
+container_structure_test(
+    name = "base-container_test",
+    configs = [":test_linux_amd64.yaml"],
+    image = ":image_platform",
+    target_compatible_with = COMPATIBLE_WITH,
+)

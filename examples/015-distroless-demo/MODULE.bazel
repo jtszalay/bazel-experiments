@@ -1,0 +1,27 @@
+module(name = "distroless_demo")
+
+# musl added so that we don't need a gcc or CC in path.
+bazel_dep(name = "toolchains_musl", version = "0.1.27", dev_dependency = True)
+
+bazel_dep(name = "tar.bzl", version = "0.7.0")
+bazel_dep(name = "rules_oci", version = "2.2.7")
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "rules_distroless", version = "0.6.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.22.0")
+
+# Search for packages here: https://packages.debian.org/search?keywords=search
+apt = use_extension(
+    "@rules_distroless//apt:extensions.bzl",
+    "apt",
+    dev_dependency = True,
+)
+apt.install(
+    name = "base-deps",
+    lock = "@@//containers:base-deps.lock.json",
+    manifest = "//containers:base-deps.yaml",
+    mergedusr = True,
+)
+use_repo(
+    apt,
+    "base-deps",
+)

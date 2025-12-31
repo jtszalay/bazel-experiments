@@ -1,0 +1,39 @@
+schemaVersion: "2.0.0"
+
+commandTests:
+  - name: "echo hello"
+    command: "/usr/bin/bash"
+    args: ["-c", "echo hello world!"]
+    expectedOutput: ["hello world!"]
+  - name: "apt list --installed"
+    command: "apt"
+    args: ["list", "--installed"]
+    expectedOutput:
+      - Listing\.\.\.
+      - apt/now 3\.0\.3 amd64 \[installed,local]
+      - bash/now 5\.2\.37-2\+b5 amd64 \[installed,local\]
+      - coreutils/now 9\.7-3 amd64 \[installed,local\]
+      - dpkg/now 1\.22\.21 amd64 \[installed,local\]
+  - name: "whoami"
+    command: "whoami"
+    expectedOutput: [root]
+  - name: "naive ca-certs check"
+    command: "head"
+    args: ["-1", "/etc/ssl/certs/ca-certificates.crt"]
+    expectedOutput: [-----BEGIN CERTIFICATE-----]
+  - name: "in depth ca-certs check"
+    command: "/usr/bin/openssl"
+    args: ["s_client", "-connect", "www.google.com:443"]
+    expectedOutput: ["Verify return code: 0 .ok."]
+  - name: "curl test"
+    command: "curl"
+    args: ["--version"]
+    expectedOutput: ["curl "]
+  - name: "busybox test"
+    command: "busybox"
+    args: ["--help"]
+    expectedOutput: ["BusyBox v"]
+  - name: "file test"
+    command: "file"
+    args: ["--version"]
+    expectedOutput: ["file-"]

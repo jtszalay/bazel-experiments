@@ -1,0 +1,12 @@
+[
+  {
+    "regex": "^Check that imports in Go sources match importpath attributes in deps.$",
+    "command": "bazel",
+    "args": [ "run", "//:gazelle" ]
+  },
+  {
+    "regex": "No test targets were found, yet testing was requested",
+    "command": "bazel",
+    "args": [ "run", "//:gazelle" ]
+  }
+]
